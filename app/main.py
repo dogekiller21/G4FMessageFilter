@@ -35,8 +35,9 @@ async def execute_prompt_request(request: Request, model: G4FModel = Form(...), 
     logger.info("Executing prompt with model %s", model)
     result = await execute_prompt(
         client=request.app.client,
-        model=model, prompt=prompt,
+        model=model,
+        prompt=prompt,
         system_prompt=system_prompt
     )
-
+    logger.info("Prompt with model %s executed successfully", model)
     return templates.TemplateResponse("result.html", {"request": request, "result": result})
